@@ -10,7 +10,7 @@
     const app = express()
     // Midleware pour traiter les requêtes Json
     app.use(express.json())
-    app.use(cors({origin:'http://localhost:4000', credentials:true}))
+    app.use(cors({origin:'http://localhost:3000', credentials:true}))
     app.use(cookieParser())
 
     // Importer la route user
@@ -18,7 +18,6 @@
 
     // Démarrer le serveur sur le port 4000
     app.listen(4000)
-    app.use(cors())
    
     // Connexion à mongoDB
     mongoose.connect(process.env.MONGO_URL)
@@ -60,6 +59,7 @@
 
     app.get('/api/article/:id', async(req,res) => {
         const {id} = req.params
+        console.log('ID à supprimer:', id);
         const article = await Post.findById(id)
         res.json(article)
     })
